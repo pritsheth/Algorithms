@@ -28,15 +28,19 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
-
-        for i in range(len(prices)):
-
-
+        buyIndex = 0
+        sellIndex, i, profit = 0, 1, 0
+        while (i < len(prices)):
+            if (prices[buyIndex] < prices[i]):
+                profit += prices[i] - prices[buyIndex]
+                buyIndex = i
+            i += 1
+        print(" multiple profit is", profit)
 
     # https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/
 
 
-    def maxProfitWithFees(prices, fee):
+    def maxProfitWithFees(self, prices, fee):
         """
         :type prices: List[int]
         :type fee: int
@@ -51,4 +55,7 @@ class Solution:
             max_global = max(max_global, max_cur)
         print("total profit", max_global)
 
-    maxProfitWithFees([1, 3, 2, 8, 4, 9], 2)
+
+s = Solution()
+# s.maxProfitWithFees([1, 3, 2, 8, 4, 9], 2)
+s.maxProfitWithMultipleSell([3,4,5,6,7])
