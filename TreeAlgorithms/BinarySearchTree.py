@@ -25,6 +25,30 @@ class TreeNode(object):
         self.postorder(node.right)
         print(node.val)
 
+
+    def getHeight(self,root):
+        if root is None:
+            return 0
+        return max(self.getHeight(root.left),self.getHeight(root.right))+1
+
+    def getDiameter(self,root):
+
+        if root is None:
+            return 0
+
+        leftHeight = self.getHeight(root.left)
+        rightHeight = self.getHeight(root.right)
+        leftDiameter = self.getDiameter(root.left)
+        rightDiameter = self.getDiameter(root.right)
+
+        currentDiameter = leftHeight + rightHeight
+        return max(currentDiameter,max(leftDiameter,rightDiameter))
+
+
+
+
+
+
             # 1
        # 2           3
     # 4    5       6   7
@@ -47,11 +71,4 @@ root2.right = root5
 root3.left = root6
 root3.right = root7
 
-
-
-
-root1.preorder(root1)
-print("-------------------")
-root1.postorder(root1)
-print("-------------------")
-root1.inorder(root1)
+print(root1.getDiameter(root1))
