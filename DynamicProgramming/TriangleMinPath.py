@@ -1,15 +1,19 @@
-class Solution:
+class Solution(object):
     def minimumTotal(self, triangle):
-        rows = len(triangle)
-        dp = [[]]
 
-        for i in range(rows):
-            for j in range(i + 1):
-                # if(i-1>=0)
-                triangle[i][j] = min(min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i - 1][j + 1])
+        # Base case for empty list
+        if len(triangle) == 0:
+            return -1
 
+        if len(triangle) == 1:
+            return triangle[0][0]
+        for i in range(1, len(triangle)):
+            for j in range(0, i + 1):
+                x = float("INF")
+                if j <= i - 1:
+                    x = min(x, triangle[i - 1][j])
+                if j - 1 >= 0:
+                    x = min(x, triangle[i - 1][j - 1])
 
-        """
-        :type triangle: List[List[int]]
-        :rtype: int
-        """
+                triangle[i][j] += x
+        return min(triangle[-1])

@@ -1,6 +1,13 @@
 class Solution:
     # @param A : list of integers
     # @return a list of integers
+
+    def maxSubArray(self, nums):
+        for i in range(len(nums)):
+            max_cur = max(0, max(max_cur + nums[i]))
+            max_global = max(max_global, max_cur)
+        return max_global
+
     def maxset(self, A):
         cur_sum, final_sum = 0, 0
         current = [0] * 2
