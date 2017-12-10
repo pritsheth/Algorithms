@@ -8,6 +8,7 @@ def getCountBit(n):
         count += 1
     return count
 
+
 # print(getCountBit(15))
 # String is having all unique characters or not
 
@@ -20,15 +21,18 @@ def isUniqueChars(text):
         bitmap |= 1 << n
     return True
 
+
 def isOnly1BitSet(bitmap):
     return bitmap & bitmap - 1 == 0
+
 
 # String permutation :  https://leetcode.com/articles/palindrome-permutation/
 def isPalindromePermutation(text):
     bitmap = 0
     for ch in text:
-        bitmap = toggleNthBit(bitmap, ord(ch) - ord('a'))
+        bitmap = toggleNthBitOptimizeWay(bitmap, ord(ch) - ord('a'))
     return isOnly1BitSet(bitmap)
+
 
 # Toggle the bit at n th location
 def toggleNthBit(bitmap, n):
@@ -39,6 +43,13 @@ def toggleNthBit(bitmap, n):
         bitmap &= ~(1 << n)
     return bitmap
 
-print("toggle the vlaue of bitmap", isPalindromePermutation("aaccfg"))
+
+def toggleNthBitOptimizeWay(bitmap, n):
+    mask = 1 << n
+    bitmap ^= mask  # Setting the bit at nth location
+    return bitmap
+
+
+print("toggle the vlaue of bitmap", isPalindromePermutation("aaccf"))
 
 #  Checking the bit is set or not at Nth position
