@@ -8,12 +8,29 @@ class connectionFinder:
             self.size[i] = i
 
     # Id2 will become a root of Id1 :
-
     def union(self, id1, id2):
         rootA = self.find(id1)
         rootB = self.find(id2)
         self.id[rootA] = rootB
         print(self.id)
+
+    # Optimization to remove skewed tree and construct weighted binary tree:
+
+    def weightedUnion(self, id1, id2):
+
+        root1 = self.find(id1)
+        root2 = self.find(id2)
+
+        size1 = self.size[root1]
+        size2 = self.size[root2]
+
+        if size1 < size2:
+            self.id[root1] = root2
+            self.size[root2] += self.size[root1]
+
+        else:
+            self.id[root2] = root1
+            self.size[root1] += self.size[root2]
 
     def find(self, x):
 
