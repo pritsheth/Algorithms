@@ -2,7 +2,6 @@
 # http://www.lintcode.com/en/problem/min-stack/
 
 class MinStack:
-
     def __init__(self):
         self.stack = []
         self.minimum = -float("INF")
@@ -16,7 +15,7 @@ class MinStack:
 
     def push(self, number):
         if number < self.minimum:
-            y =2*number - self.minimum
+            y = 2 * number - self.minimum
             self.minimum = number
             self.stack.append(y)  # Always push 2*x - min when x < min
         else:
@@ -32,7 +31,7 @@ class MinStack:
         y = self.stack.pop()
         if y < self.minimum:
             x = self.minimum
-            self.minimum = 2*self.minimum - y  # how to fetch the old min : 2*min - y
+            self.minimum = 2 * self.minimum - y  # how to fetch the old min : 2*min - y
             return x
         else:
             return y
@@ -45,4 +44,4 @@ class MinStack:
     def min(self):
         return self.minimum
 
-    # write your code here
+        # write your code here
