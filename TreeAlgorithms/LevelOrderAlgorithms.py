@@ -9,6 +9,34 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+
+        :type root: TreeNode
+        :rtype: str
+        """
+
+        que = deque()
+        decode = ""
+        que.append(root)
+
+        while (que):
+            node = que.popleft()
+            if node.left:
+                que.append(node.left)
+                decode += str(node.left.val)
+            else:
+                decode += "#"
+            if node.right:
+                que.append(node.right)
+                decode += str(node.right.val)
+            else:
+                decode += "#"
+
+        return decode
+
+
+
     def levelOrder(self, root):
         queue = deque()
         queue.append(root)
@@ -83,4 +111,6 @@ root2.right = root5
 root3.left = root6
 root3.right = root7
 
-root1.verticalOrderOfTree(root1)
+# root1.verticalOrderOfTree(root1)
+serialize = root1.serialize(root1)
+print(serialize)

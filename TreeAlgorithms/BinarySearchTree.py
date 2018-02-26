@@ -69,6 +69,29 @@ class TreeNode(object):
         getMaxDiameter(root)
         return self.maxD
 
+    # Must do question
+    def longestUnivaluePath(self, root):
+
+        self.longPath = 0
+
+        def getPath(root):
+            if root is None:
+                return 0
+
+            lpath = getPath(root.left)
+            rpath = getPath(root.right)
+
+            lnode, rnode = 0, 0
+            if root.left and root.left.val == root.val:
+                lnode = lpath + 1
+            if root.right and root.right.val == root.val:
+                rnode = rpath + 1
+            self.longPath = max(self.longPath, lnode + rnode)
+            return max(lnode, rnode)
+
+        getPath(root)
+        return self.longPath
+
     def isEqualtree(self, s, t):
 
         if s is None and t is None:
@@ -229,5 +252,5 @@ root2.right = root5
 root3.left = root6
 root3.right = root7
 
-root1.connect(root1)
-root1.levelOrder(root1)
+# print(root1.getDiameter(root1))
+# root1.levelOrder(root1)
