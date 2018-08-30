@@ -34,5 +34,3 @@ class Solution:
         :type word: str
         :rtype: bool
         """
-
-()
