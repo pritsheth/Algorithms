@@ -16,22 +16,24 @@ class Graph:
         q.append(root)
         while (q):
             root = q.popleft()
+            visited[root] = True
             print(root)
-            if not visited[root]:
-                visited[root] = True
-                for child in graph[root]:
+            for child in graph[root]:
+                if not visited[child]:
                     q.append(child)
-
-        pass
 
     def DFS_with_stack(self, root):
         visited = [False] * self.totalNodes
         stack = []
-
+        stack.append(root)
         while stack:
             root = stack.pop()
+            print(root)
             visited[root] = True
-            # for node in self.adj[root]:
+            for node in self.adj[root]:
+                if not visited[node]:
+                    stack.append(node)
+
         pass
 
     def DFS(self, root):
@@ -58,7 +60,8 @@ g.addEdge(3, 5)
 print(g.adj)
 print("DFS traversal")
 g.DFS(1)
-
+print("DFS Stack traversal")
+g.DFS_with_stack(1)
 print("BFS traversal")
 g.BFS(g.adj, 1)
 
