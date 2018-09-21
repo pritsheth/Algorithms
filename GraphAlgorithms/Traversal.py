@@ -24,6 +24,16 @@ class Graph:
 
         pass
 
+    def DFS_with_stack(self, root):
+        visited = [False] * self.totalNodes
+        stack = []
+
+        while stack:
+            root = stack.pop()
+            visited[root] = True
+            # for node in self.adj[root]:
+        pass
+
     def DFS(self, root):
         visited = [False] * self.totalNodes
 
