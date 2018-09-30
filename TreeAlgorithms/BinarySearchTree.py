@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -29,12 +30,12 @@ class TreeNode(object):
         print(node.val)
 
 
-    def getHeight(self,root):
+    def getHeight(self, root):
         if root is None:
             return 0
-        return max(self.getHeight(root.left),self.getHeight(root.right))+1
+        return max(self.getHeight(root.left), self.getHeight(root.right)) + 1
 
-    def getDiameter(self,root):
+    def getDiameter(self, root):
 
         if root is None:
             return 0
@@ -45,11 +46,11 @@ class TreeNode(object):
         rightDiameter = self.getDiameter(root.right)
 
         currentDiameter = leftHeight + rightHeight
-        return max(currentDiameter,max(leftDiameter,rightDiameter))
+        return max(currentDiameter, max(leftDiameter, rightDiameter))
 
-            # Most optimized diameter solution
+        # Most optimized diameter solution
 
-    def getDiameterOptimized(self,root):
+    def getDiameterOptimized(self, root):
         if root is None:
             return 0
 
@@ -63,8 +64,8 @@ class TreeNode(object):
             rightHeight = getMaxDiameter(root.right)
 
             currentD = leftHeight + rightHeight
-            self.maxD = max(self.maxD,currentD)
-            return max(leftHeight,rightHeight) + 1
+            self.maxD = max(self.maxD, currentD)
+            return max(leftHeight, rightHeight) + 1
 
         getMaxDiameter(root)
         return self.maxD
@@ -100,49 +101,45 @@ class TreeNode(object):
         if s is None or t is None:
             return False
 
+        return s.val == t.val and self.isEqualtree(s.left, t.left) and self.isEqualtree(s.left, t.left)
 
-        return s.val == t.val and self.isEqualtree(s.left,t.left) and self.isEqualtree(s.left,t.left)
-
-    def isSubTree(self,s,t):
+    def isSubTree(self, s, t):
 
         if s is None:
             return True
 
-        return self.isEqualtree(s,t) or self.isEqualtree(s.left,t) or self.isEqualtree(s.right,t)
+        return self.isEqualtree(s, t) or self.isEqualtree(s.left, t) or self.isEqualtree(s.right, t)
 
     def trimBST(self, root, L, R):
         if L > root.val or root.val > R:
             return None
 
-        root.left=self.trimBST(root.left,L,R)
-        root.right=self.trimBST(root.right,L,R)
-
-
+        root.left = self.trimBST(root.left, L, R)
+        root.right = self.trimBST(root.right, L, R)
 
     def constructMaximumBinaryTree(self, nums):
-            """
-            :type nums: List[int]
-            :rtype: TreeNode
-            """
-            return self.constructMaxTree(nums,0,len(nums)-1)
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        return self.constructMaxTree(nums, 0, len(nums) - 1)
 
+    def constructMaxTree(self, nums, low, high):
 
-    def constructMaxTree(self,nums,low,high):
-
-        if high<low:
+        if high < low:
             return None
         if low == high:
             return TreeNode(nums[low])
         index = self.getMaxNode(nums, low, high)
         root = TreeNode(nums[index])
-        root.left = self.constructMaxTree(nums,low,index-1)
-        root.right = self.constructMaxTree(nums,index+1,high)
+        root.left = self.constructMaxTree(nums, low, index - 1)
+        root.right = self.constructMaxTree(nums, index + 1, high)
         return root
 
-    def getMaxNode(self,nums,low,high):
-        maxi,index = -10000,low
-        for i in range(low,high):
-             if maxi<nums[i]:
+    def getMaxNode(self, nums, low, high):
+        maxi, index = -10000, low
+        for i in range(low, high):
+            if maxi < nums[i]:
                 maxi = nums[i]
                 index = i
 
@@ -150,45 +147,37 @@ class TreeNode(object):
 
     def connect(self, root):
 
-            if root is None:
-                return
+        if root is None:
+            return
 
-            def getNextNode(root):
-                node = root.next
-                while (node is not None):
-                    if node.left is not None:
-                        return node.left
-                    elif node.right is not None:
-                        return node.right
-                    node = node.next
-                return None
+        def getNextNode(root):
+            node = root.next
+            while (node is not None):
+                if node.left is not None:
+                    return node.left
+                elif node.right is not None:
+                    return node.right
+                node = node.next
+            return None
 
-            if root.left is not None:
-                root.left.next = root.right if root.right is not None else getNextNode(root)
-            if root.right is not None:
-                root.right.next = getNextNode(root)
-            self.connect(root.left)
-            self.connect(root.right)
+        if root.left is not None:
+            root.left.next = root.right if root.right is not None else getNextNode(root)
+        if root.right is not None:
+            root.right.next = getNextNode(root)
+        self.connect(root.left)
+        self.connect(root.right)
 
+        # 1
 
-
-
-
-
-
-
-
-
-            # 1
-       # 2           3
+    # 2           3
     # 4    5       6   7
 
-    def levelOrder(self,root):
+    def levelOrder(self, root):
         que = []
         que.append(root)
         d = 1
 
-        while (len(que)!=0):
+        while (len(que) != 0):
             x = 0
             print("--------")
             for i in range(d):
@@ -196,13 +185,12 @@ class TreeNode(object):
                 print(root.val)
                 if root.left is not None:
                     que.append(root.left)
-                    x +=1
+                    x += 1
                 if root.right is not None:
                     que.append(root.right)
-                    x +=1
+                    x += 1
 
             d = x
-
 
     def findFrequentTreeSum(self, root):
 
@@ -219,15 +207,12 @@ class TreeNode(object):
             self.dict1[root.val] += 1
             return root.val
 
-
         getTreeSum(root)
         print(self.dict1)
         d = defaultdict(list)
         for i in self.dict:
             d[i].append(dict[i])
         print(d)
-
-
 
         """
         :type root: TreeNode
