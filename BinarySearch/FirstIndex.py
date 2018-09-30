@@ -6,7 +6,7 @@ def getIndex(nums, target):
     # For more understanding : here we are using
     # low<high to avoid infite loop as we are setting (high = mid) when we got match
     low, high = 0, len(nums)
-    while (low < high):
+    while (low < high): # Very imp condition
         mid = (low + high) >> 1
 
         if nums[mid] < target:
@@ -51,7 +51,6 @@ def binarySearchIterative(nums, target):
             low = mid + 1
 
     return -1
-
 
 def binarySearchRecursive(nums, target):
     def recur(nums, low, high, target):
