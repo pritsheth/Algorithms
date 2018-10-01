@@ -2,40 +2,11 @@ from collections import deque
 from collections import defaultdict
 
 
-
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
-
-    def serialize(self, root):
-        """Encodes a tree to a single string.
-
-        :type root: TreeNode
-        :rtype: str
-        """
-
-        que = deque()
-        decode = ""
-        que.append(root)
-
-        while (que):
-            node = que.popleft()
-            if node.left:
-                que.append(node.left)
-                decode += str(node.left.val)
-            else:
-                decode += "#"
-            if node.right:
-                que.append(node.right)
-                decode += str(node.right.val)
-            else:
-                decode += "#"
-
-        return decode
-
-
 
     def levelOrder(self, root):
         queue = deque()
@@ -69,29 +40,39 @@ class TreeNode(object):
         print(answerList)
         return answerList
 
+    # N ary Tree : Level order traversal
 
+    """
+    # Definition for a Node.
+    class Node(object):
+        def __init__(self, val, children):
+            self.val = val
+            self.children = children
+    """
 
+    class Solution(object):
+        def levelOrder(self, root):
+            """
+            :type root: Node
+            :rtype: List[List[int]]
+            """
+            if not root:
+                return []
+            q = deque()
+            q.append(root)
+            final_list = []
+            while q:
+                result = []
+                for i in range(len(q)):
+                    node = q.popleft()
+                    result.append(node.val)
+                    childs = node.children
+                    for ch in childs:
+                        q.append(ch)
 
-    def verticalOrderOfTree(self, root):
-        queue = deque()
-        dict = defaultdict(list)
-        queue.append([root, 0])
+                final_list.append(result)
+            return final_list
 
-        while (queue):
-            nodePair = queue.popleft()
-            node = nodePair[0]
-            hd = nodePair[1]
-            print("popping node", node.val)
-            dict[hd].append(node.val)
-
-            if node.left:
-                queue.append([node.left, hd - 1])
-            if node.right:
-                queue.append([node.right, hd + 1])
-
-        print(dict)
-        l = sorted(dict.items())
-        print(l)
 
 
 root1 = TreeNode(1)
@@ -112,5 +93,3 @@ root3.left = root6
 root3.right = root7
 
 # root1.verticalOrderOfTree(root1)
-serialize = root1.serialize(root1)
-print(serialize)

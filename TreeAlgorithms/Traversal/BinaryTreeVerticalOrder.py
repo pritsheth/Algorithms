@@ -1,4 +1,5 @@
 from collections import deque
+from collections import defaultdict
 
 
 class TreeNode(object):
@@ -19,6 +20,27 @@ class TreeNode(object):
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
+
+    def verticalOrderOfTree(self, root):
+        queue = deque()
+        dict = defaultdict(list)
+        queue.append([root, 0])
+
+        while (queue):
+            nodePair = queue.popleft()
+            node = nodePair[0]
+            hd = nodePair[1]
+            print("popping node", node.val)
+            dict[hd].append(node.val)
+
+            if node.left:
+                queue.append([node.left, hd - 1])
+            if node.right:
+                queue.append([node.right, hd + 1])
+
+        print(dict)
+        l = sorted(dict.items())
+        print(l)
 
 
 root1 = TreeNode(1)
