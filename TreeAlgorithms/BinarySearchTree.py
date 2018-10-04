@@ -29,7 +29,6 @@ class TreeNode(object):
         self.postorder(node.right)
         print(node.val)
 
-
     def getHeight(self, root):
         if root is None:
             return 0
@@ -111,11 +110,20 @@ class TreeNode(object):
         return self.isEqualtree(s, t) or self.isEqualtree(s.left, t) or self.isEqualtree(s.right, t)
 
     def trimBST(self, root, L, R):
-        if L > root.val or root.val > R:
+
+        if not root:
             return None
 
         root.left = self.trimBST(root.left, L, R)
         root.right = self.trimBST(root.right, L, R)
+
+        if L > root.val:
+            return self.trimBST(root.right, L, R)
+
+        elif root.val > R:
+            return self.trimBST(root.left, L, R)
+
+        return root
 
     def constructMaximumBinaryTree(self, nums):
         """

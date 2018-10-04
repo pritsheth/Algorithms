@@ -2,6 +2,7 @@ from collections import deque
 
 
 class Codec:
+
     def serialize(self, root):
         """Encodes a tree to a single string.
 
@@ -27,7 +28,7 @@ class Codec:
             else:
                 decode += "#"
 
-
+    # TODO: complete on leetcode
     def deserialize(self, data):
         # TreeNode root =
 
@@ -38,7 +39,3 @@ class Codec:
         """
 
         # for i in range(len(data)):
-
-
-
-
