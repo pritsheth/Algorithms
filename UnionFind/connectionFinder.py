@@ -25,6 +25,7 @@ class connectionFinder:
         size2 = self.size[root2]
 
         if size1 < size2:
+            # Make small one child
             self.id[root1] = root2
             self.size[root2] += self.size[root1]
 
