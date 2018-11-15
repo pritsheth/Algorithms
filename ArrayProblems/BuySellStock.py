@@ -15,7 +15,7 @@ class Solution:
         max_cur = 0
         max_global = 0
         for i in range(1, len(prices)):
-            max_cur = + prices[i] - prices[i - 1]
+            max_cur += prices[i] - prices[i - 1]
             max_cur = max(0, max_cur)
             max_global = max(max_cur, max_global)
         return max_global

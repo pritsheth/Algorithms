@@ -12,11 +12,13 @@ def countPairs(k, a):
             pairs += d[k - a[i]]
 
     total = dup + pairs // 2
-    print("total is new ",total)
+    print("total is new ", total)
 
-countPairs(6,[3,3,3])
 
-#  With dfuplicate pair as well
+countPairs(6, [3, 3, 3])
+
+
+#  With duplicate pair as well
 def findPairsWithAllPair(a, k):
     d = Counter(a)
     dup = 0
@@ -39,9 +41,9 @@ def findPairs(a, k):
             pairs += 1
             d[k + a[i]] = 0
 
-
     print("dup is", dup)
     print("pairs ", pairs)
     print("dict ", d)
+
 
 findPairs([3, 1, 4, 1, 5], 2)
