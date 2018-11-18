@@ -27,3 +27,5 @@ getRangeMinimumQuery([7, 2, 3, 0, 5, 10, 3, 12, 18])
 
 
 # TODO: Must do the segment tree:
+
+
