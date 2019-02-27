@@ -10,23 +10,23 @@ class solution:
 
     # TODO: Trie basics
     def addWord(self, word, value, trieRoot):
-        for i in range(len(word)):
-            if word[i] in trieRoot.childs:
-                trieRoot = trieRoot.childs[word[i]]
+        for ch in word:
+            if ch in trieRoot.childs:
+                trieRoot = trieRoot.childs[ch]
             else:
-                trieNode = Trie(None, word[i])
-                trieRoot.childs[word[i]] = trieNode
+                trieNode = Trie(None, ch)
+                trieRoot.childs[ch] = trieNode
                 trieRoot = trieNode
 
         trieRoot.isCompleted = True
         trieRoot.value = value
 
     def getRoot(self, word, trieRoot):
-        for i in range(len(word)):
+        for ch in word:
             if trieRoot.isCompleted:
                 return trieRoot
-            if word[i] in trieRoot.childs:
-                trieRoot = trieRoot.childs[word[i]]
+            if ch in trieRoot.childs:
+                trieRoot = trieRoot.childs[ch]
             else:
                 return None
 
