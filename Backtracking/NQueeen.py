@@ -1,5 +1,6 @@
 import copy
 
+
 class Solution(object):
 
     def isValid(self, matrix, row, col, n):
@@ -31,7 +32,7 @@ class Solution(object):
 
         if n == row:
             print("solution")
-            x = [ "".join(matrix[i])  for i in range(n)]
+            x = ["".join(matrix[i]) for i in range(n)]
             result.append(x)
             return
 
@@ -56,3 +57,34 @@ class Solution(object):
 
 s = Solution()
 s.solveNQueens(4)
+
+
+class Solution:
+    def totalNQueens(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+
+        def backtrack(row, result, n, dig1, dig2, col_map):
+            if row == n:
+                result[0] += 1
+                return
+
+            for col in range(0, n):
+
+                id1 = col - row + n
+                id2 = col + row
+
+                #                 isValid step
+                if dig1[id1] or dig2[id2] or col_map[col]:
+                    continue
+
+                dig1[id1], dig2[id2], col_map[col] = 1, 1, 1
+                backtrack(row + 1, result, n, dig1, dig2, col_map)
+                dig1[id1], dig2[id2], col_map[col] = 0, 0, 0
+
+        result = [0]
+        dig1, dig2, col_map = [0] * (2 * n), [0] * (2 * n), [0] * n
+        backtrack(0, result, n, dig1, dig2, col_map)
+        return result[0]
